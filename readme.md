@@ -1,8 +1,4 @@
-# 编译原理实验报告
-
-侯思佳 2018303060003 计科6班
-
-[toc]
+# Logic Expression Compiler
 
 ## 实验内容
 
