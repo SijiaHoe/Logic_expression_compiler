@@ -152,24 +152,23 @@ newline [\r\n]  				// 换行符
 
 ​		编译所写的文件：
 
-![截屏2021-06-27 上午11.07.33](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.07.33.png)
+![image](https://user-images.githubusercontent.com/51059802/141681513-23490951-2a6d-4ee0-baf3-efb18b47e51a.png)
+
 
 ​		成功通过编译，生成如下文件：
 
-![截屏2021-06-27 上午11.29.36](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.29.36.png)
+![image](https://user-images.githubusercontent.com/51059802/141681523-6cef240e-f386-424b-8f52-474f81df7880.png)
 
 #### 运行结果
 
 ​		测试程序输出：
 
-![截屏2021-06-27 上午11.10.32](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.10.32.png)
+![image](https://user-images.githubusercontent.com/51059802/141681534-02133267-d6d4-4a26-863b-588194d1402b.png)
+![image](https://user-images.githubusercontent.com/51059802/141681543-4c243239-63b0-4802-b207-c26f251f450b.png)
+![image](https://user-images.githubusercontent.com/51059802/141681548-466a0752-c626-4720-a66b-bc988123adf8.png)
 
-![截屏2021-06-27 上午11.12.49](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.12.49.png)
+​		下面测试一些不合法的文法：
 
-![截屏2021-06-27 上午11.13.02](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.13.02.png)
-
-​		上述测试用例为老师提供的例子，均是预期输出。下面测试一些不合法的文法：
-
-![截屏2021-06-27 上午11.14.12](/Users/lilhoe/Library/Application Support/typora-user-images/截屏2021-06-27 上午11.14.12.png)
+![image](https://user-images.githubusercontent.com/51059802/141681564-b0f92f78-0a4b-4700-8b13-c61cb7f88a74.png)
 
 ​		程序达到预期效果。
