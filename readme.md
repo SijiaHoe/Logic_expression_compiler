@@ -27,7 +27,7 @@
 
 ## Grammar Analysis
 
-#### bison使用
+#### Bison
 
 ​		bison 和 flex 配合使用，它可以将用户提供的语法规则转化成一个语法分析器，读取用户提供的语法的产生式，生成一个 C 语言格式的 LALR(1) 动作表，并将其包含进一个名为 yyparse 的 C 函数，这个函数的作用就是利用这个动作表来解析 token stream ，而这个 token stream 是由 flex 生成的词法分析器扫描源程序得到。
 
@@ -35,20 +35,20 @@
 
 ​		bison 会将 Productions 段里的第一个产生式的左边的非终结符（本文件中为 Program ）当作语法的起始符号，同时，为了保证起始符号不位于任何产生式的右边， bison 会自动生成增广文法，而将这个新增的符号当作解析的起始符号。
 
-#### 文法优先级和结合律	
+#### Grammatical precedence and associativity
 
 ​		在.y文件中定义了这些运算符token的优先级和结合律，在代码中，先出现的声明优先级越低，同时声明的token具有相同的优先级。规则如下：
 
-| Priority(top-down） | simbol        | 结合律 |
+| Priority(top-down） | simbol        | Associativity |
 | ------------------ | ----------- | ------ |
-| 1                  | OR          | 左结合 |
-| 2                  | AND         | 左结合 |
-| 3                  | LT GT LE GE | 左结合 |
-| 4                  | EQ NE       | 左结合 |
-| 5                  | NOT         | 右结合 |
-| 6                  | LP RP       | 左结合 |
+| 1                  | OR          | Left |
+| 2                  | AND         | Left |
+| 3                  | LT GT LE GE | Left |
+| 4                  | EQ NE       | Left |
+| 5                  | NOT         | Right  |
+| 6                  | LP RP       | Left |
 
-#### 文法设计
+#### Grammar Design
 
 ​		根据逻辑表达式的形式，总结出如下的文法：
 
@@ -83,13 +83,13 @@
 ​		短路次数仅与AND和OR两个运算符有关。首先在.y文件中，定义一个全局变量来统计短路次数：
 
 ```c
-int short_cut = 0;	// 记录短路次数  
+int short_cut = 0;	// record the number of shortcuts 
 ```
 
 ​		对于AND，如果第一个表达式的结果为False，则进行短路，short_cut值自增1，返回为True；对于OR，如果第一个表达式的结果为True，则进行短路，short_cut值自增1，返回为True。其他情况不考虑短路操作，短路操作对应的部分代码如下：
 
 ```c
-	| Exp AND Exp {			// 与操作
+	| Exp AND Exp {			// AND operation
 		if ( $1 == 0 ) {	// 第一个操作数为False进行短路
 			short_cut++;
 			$$ = 0;
@@ -100,7 +100,7 @@ int short_cut = 0;	// 记录短路次数
 			else { $$ = 0; }
 		}
 	}
-	| Exp OR Exp {  	// 或操作
+	| Exp OR Exp {  	// OR operation
 		if ($1 == 1) {	// 第一个操作数为True进行短路
 			short_cut++;
 			$$ = 1;
@@ -112,7 +112,7 @@ int short_cut = 0;	// 记录短路次数
 	}
 ```
 
-#### 错误处理
+#### Error Handling
 
 ​		该程序所接受的所有输入符号如下：
 
@@ -128,9 +128,9 @@ int short_cut = 0;	// 记录短路次数
 %token NOT	// !
 %token LP	// (
 %token RP	// )
-digit	[0-9]|[1-9][0-9]*	// 数字
-whitespace [ \t\f\v]		// 空白符
-newline [\r\n]  				// 换行符
+digit	[0-9]|[1-9][0-9]*	// Numbers
+whitespace [ \t\f\v]		// Whitespace
+newline [\r\n]  		// Newline
 ```
 
 ​		当输入的字符不在上述列表中时，程序输出错误信息，并显示第一个输入错误的字符内容。当有多个错误时，只会显示第一个错误，检测到错误就立即停止运行。代码如下：
@@ -148,12 +148,12 @@ newline [\r\n]  				// 换行符
 
 #### Compile outputs
 
-​		编译所写的文件：
+​	Compile files:
 
 ![image](https://user-images.githubusercontent.com/51059802/141681513-23490951-2a6d-4ee0-baf3-efb18b47e51a.png)
 
 
-​		成功通过编译，生成如下文件：
+​	Compile succeeds, generates files listed below：
 
 ![image](https://user-images.githubusercontent.com/51059802/141681523-6cef240e-f386-424b-8f52-474f81df7880.png)
 
