@@ -1,8 +1,8 @@
 # Logic Expression Compiler
 
-## 实验内容
+## Experiment Contents
 
-#### 逻辑表达式的求值工具
+#### Logistic Expression的求值工具
 
 ​		输入一个包含数值的逻辑表达式，输出计算其真值，和因短路操作而跳过的数值比较的次数。输出格式为Output: [true or false], [次数]。注意，逻辑表达式的计算符合短路算法。其中，!计入逻辑运算次数，而 == 或 != 只用于非布尔型的数值比较。
 
@@ -146,9 +146,9 @@ newline [\r\n]  				// 换行符
 }
 ```
 
-## 编译及运行
+## compilation and Runtime output
 
-#### 编译结果
+#### Compile outputs
 
 ​		编译所写的文件：
 
