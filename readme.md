@@ -2,30 +2,30 @@
 
 ## Experiment Contents
 
-​输入一个包含数值的逻辑表达式，输出计算其真值，和因短路操作而跳过的数值比较的次数。输出格式为Output: [true or false], [次数]。注意，逻辑表达式的计算符合短路算法。其中，!计入逻辑运算次数，而 == 或 != 只用于非布尔型的数值比较。
+​	The input is a logical expression containing a number, and the output is the boolean value after calculation and the number of comparisons skipped due to short-circuit operations. The output format is "Output: [true or false], [number of times]". Note that the evaluation of the logical expression conforms to the short-circuit algorithm. Among them, the operater "!" counts the number of logical operations, and "==" or "!=" are only used for non-boolean numeric comparisons.
 
-## 词法分析
+## Lexical Analysis
 
-​		Flex器是一个开源的词法分析器，编译器将开发者输入的模式转换成一个状态转换图，并生成相应的实现代码，存放到.yy,c文件中。
+​		Flex is an open source lexical analyzer. The compiler converts the pattern input by the developer into a state transition diagram, and generates the corresponding implementation code, which is stored in the .yy, c files.
 
-| 标识符token | 符号                | 含义     |
+| token | symbol                | meaning    |
 | ----------- | ------------------- | -------- |
 | dight       | [0-9]\|\[1-9][0-9]* | number     |
 | LT          | <                   | less than    |
 | GT          | >                   | greater than  |
 | LE          | <=                  | less or equal to |
-| GE          | >=                  | 大于等于 |
-| EQ          | ==                  | 等于     |
-| NE          | !=                  | 不等于   |
-| AND         | &&                  | 与       |
-| OR          | \|\|                | 或       |
-| NOT         | !                   | 非       |
-| LP          | (                   | 左括号   |
-| RP          | )                   | 右括号   |
-| newline     | \n\r                | 结束符号 |
-| whitespace  | \t\f\v              | 空白符   |
+| GE          | >=                  | greater or equal to |
+| EQ          | ==                  | equal to     |
+| NE          | !=                  | not equal to   |
+| AND         | &&                  | and     |
+| OR          | \|\|                | or     |
+| NOT         | !                   | not    |
+| LP          | (                   | left parentheses  |
+| RP          | )                   | right parentheses   |
+| newline     | \n\r                | line-termination |
+| whitespace  | \t\f\v              | whitespace   |
 
-## 语法分析
+## Grammar Analysis
 
 #### bison使用
 
@@ -39,7 +39,7 @@
 
 ​		在.y文件中定义了这些运算符token的优先级和结合律，在代码中，先出现的声明优先级越低，同时声明的token具有相同的优先级。规则如下：
 
-| 优先级（由低到高） | 符号        | 结合律 |
+| Priority(top-down） | simbol        | 结合律 |
 | ------------------ | ----------- | ------ |
 | 1                  | OR          | 左结合 |
 | 2                  | AND         | 左结合 |
