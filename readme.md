@@ -37,7 +37,7 @@
 
 #### Grammatical precedence and associativity
 
-​		在.y文件中定义了这些运算符token的优先级和结合律，在代码中，先出现的声明优先级越低，同时声明的token具有相同的优先级。规则如下：
+​		The precedence and associativity of these operator tokens are defined in the .y file. In the code, the first declaration has a lower precedence, and the tokens declared at the same time have the same precedence. The rules are as follows:
 
 | Priority(top-down） | simbol        | Associativity |
 | ------------------ | ----------- | ------ |
@@ -50,7 +50,7 @@
 
 #### Grammar Design
 
-​		根据逻辑表达式的形式，总结出如下的文法：
+​		According to the form of logical expressions, the following grammar is summarized:
 
 ● Program => Exp
 
@@ -76,11 +76,11 @@
 
 ​				| VALUE
 
-​		Program是文法的开始符号，经过bison编译后会自动生成对应的增广文法Program’。
+​		Program is the start symbol of the grammar, and the corresponding augmented grammar Program' will be automatically generated after bison compilation.
 
-#### 短路次数统计
+#### Records of short circuit times
 
-​		短路次数仅与AND和OR两个运算符有关。首先在.y文件中，定义一个全局变量来统计短路次数：
+​		The number of short circuits is only relevant to the AND and OR operators. First, in the .y file, define a global variable to count the number of short circuits:
 
 ```c
 int short_cut = 0;	// record the number of shortcuts 
@@ -90,7 +90,7 @@ int short_cut = 0;	// record the number of shortcuts
 
 ```c
 	| Exp AND Exp {			// AND operation
-		if ( $1 == 0 ) {	// 第一个操作数为False进行短路
+		if ( $1 == 0 ) {	// The first operand is False, so short-circuit
 			short_cut++;
 			$$ = 0;
 		}
@@ -101,7 +101,7 @@ int short_cut = 0;	// record the number of shortcuts
 		}
 	}
 	| Exp OR Exp {  	// OR operation
-		if ($1 == 1) {	// 第一个操作数为True进行短路
+		if ($1 == 1) {	// The first operand is True, so short-circuit
 			short_cut++;
 			$$ = 1;
 		}
