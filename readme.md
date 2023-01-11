@@ -86,7 +86,7 @@
 int short_cut = 0;	// record the number of shortcuts 
 ```
 
-​		对于AND，如果第一个表达式的结果为False，则进行短路，short_cut值自增1，返回为True；对于OR，如果第一个表达式的结果为True，则进行短路，short_cut值自增1，返回为True。其他情况不考虑短路操作，短路操作对应的部分代码如下：
+​		For AND operation, if the result of the first expression is False, a short circuit is performed. Then the short_cut number is incremented by 1, and the return is True; for OR operation, if the result of the first expression is True, a short circuit is performed, and the short_cut value is incremented 1, returned as True. In other cases, the short-circuit operation is not considered. The part of the code corresponding to the short-circuit operation is as follows:
 
 ```c
 	| Exp AND Exp {			// AND operation
@@ -133,12 +133,11 @@ whitespace [ \t\f\v]		// Whitespace
 newline [\r\n]  		// Newline
 ```
 
-​		当输入的字符不在上述列表中时，程序输出错误信息，并显示第一个输入错误的字符内容。当有多个错误时，只会显示第一个错误，检测到错误就立即停止运行。代码如下：
+​		When the input character is not in the above list, the program outputs an error message and displays the content of the first input error character. When there are multiple errors, only the first error will be displayed, and the operation will stop immediately when an error is detected. Code shows as below:
 
 ```c
 /* error, incorrect character */
 .	{
-	// 输入遇到非指定字符,显示出错,则不再继续分析
 	printf("Error! Wrong token '%s'.\n", yytext);
 	exit(0);
 }
